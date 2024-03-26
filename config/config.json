@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "kawak2_admin",
+    "password": "Test!123",
+    "database": "kawak3",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "port": 6034
+  },
+  "test": {
+    "username": "kawak2_admin",
+    "password": "Test!123",
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "kawak2_admin",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

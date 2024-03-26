@@ -1,0 +1,49 @@
+class ProductController {
+  create = async (req, res, next) => {
+    // const todos = await Todo.create({ ...req.body });
+
+    return res
+      .status(200)
+      .json({ message: "Product created successfully", data: [] });
+  };
+
+  fetchAll = async (eq, res, next) => {
+    // const ideas = await Todo.findAll();
+
+    return res.status(200).json({
+      data: [],
+      message: "Idea fetched successfully",
+    });
+  };
+
+  delete = async (req, res, next) => {
+    const { id } = req.params;
+    // const deletedTodo = await Todo.findByPk(id);
+    // await Todo.destroy({ where: { id } });
+
+    return res
+      .status(200)
+      .json({ message: "Product deleted successfully", data: [] });
+  };
+
+  fetch = async (req, res, next) => {
+    const { id } = req.params;
+    // const todos = await Todo.findByPk(id);
+
+    return res
+      .status(200)
+      .json({ message: "Product fetched successfully", data: [] });
+  };
+
+  update = async (req, res, next) => {
+    const { id } = req.params;
+    // await Todo.update({ ...req.body }, { where: { id } });
+    // const updatedTodos = await Todo.findByPk(id);
+
+    return res
+      .status(200)
+      .json({ message: "Product updated successfully", data: [] });
+  };
+}
+
+module.exports = new ProductController();
