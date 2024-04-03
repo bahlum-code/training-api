@@ -12,6 +12,10 @@ class ProductController {
   addProductsToDB = async (req, res, next) => {
     const products = await ProductService.addProductsToDB();
 
+    if (products.alreadyExist) {
+      return res.status(200).json(products);
+    }
+
     return res
       .status(200)
       .json({ message: "Products added to DB successfully", data: products });

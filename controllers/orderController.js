@@ -2,7 +2,8 @@ const OrderService = require("../services/order");
 
 class OrderController {
   create = async (req, res, next) => {
-    const order = await OrderService.createOrder();
+    const data = req.body;
+    const order = await OrderService.createOrder(data);
 
     return res
       .status(200)

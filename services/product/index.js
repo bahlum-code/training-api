@@ -1,4 +1,4 @@
-const Product = require("../../models/product");
+const Product = require("../../models/Product");
 
 class ProductService {
     async fetchAll() {
@@ -7,6 +7,16 @@ class ProductService {
     }
 
     async addProductsToDB() {
+        const checkProducts = await Product.findAll();
+
+        if (checkProducts.length) {
+            return{
+                message: "Products already exist in DB",
+                data: checkProducts,
+                alreadyExist: true,
+            };
+        }
+
         const products = Array.from({ length: 20 }, (_, index) => ({
             name: `Product ${index + 1}`,
             imageSrc: `https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-0${index}.jpg`,
@@ -16,11 +26,8 @@ class ProductService {
             colorId: Math.floor(Math.random() * 10) + 1, // Random color ID between 1 and 10
         }));
 
-        // await Product.bulkCreate(products);
+        await Product.bulkCreate(products);
 
-        products.forEach(async (product) => {
-            await Product.create(product);
-        });
         return products;
     }
 }
