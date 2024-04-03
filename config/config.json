@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "root",
-    "password": "root",
-    "database": "recipe_app",
+    "username": "kawak2_admin",
+    "password": "Test!123",
+    "database": "kawak3",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "port": 3306
   },
   "test": {
     "username": "kawak2_admin",

@@ -26,6 +26,12 @@ class CartController {
       .status(200)
       .json({ message: "Cart deleted successfully", data: [] });
   };
+
+  update = async (req, res, next) => {
+    return res
+      .status(200)
+      .json({ message: "Cart updated successfully", data: [] });
+  };
 }
 
 module.exports = new CartController();

@@ -1,3 +1,5 @@
+const ProductService = require("../services/product");
+
 class ProductController {
   create = async (req, res, next) => {
     // const todos = await Todo.create({ ...req.body });
@@ -7,12 +9,20 @@ class ProductController {
       .json({ message: "Product created successfully", data: [] });
   };
 
+  addProductsToDB = async (req, res, next) => {
+    const products = await ProductService.addProductsToDB();
+
+    return res
+      .status(200)
+      .json({ message: "Products added to DB successfully", data: products });
+  };
+
   fetchAll = async (eq, res, next) => {
-    // const ideas = await Todo.findAll();
+    const products = await ProductService.fetchAll();
 
     return res.status(200).json({
-      data: [],
-      message: "Idea fetched successfully",
+      data: products,
+      message: "Products fetched successfully",
     });
   };
 

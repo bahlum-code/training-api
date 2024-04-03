@@ -20,8 +20,10 @@ module.exports = (sequelize, DataTypes) => {
   Product.init(
     {
       name: DataTypes.STRING,
-      description: DataTypes.STRING,
+      imageSrc: DataTypes.STRING,
+      imageAlt: DataTypes.STRING,
       price: DataTypes.DECIMAL,
+      color: DataTypes.STRING,
       colorId: DataTypes.INTEGER,
     },
     {
