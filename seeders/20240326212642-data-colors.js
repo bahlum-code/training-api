@@ -15,10 +15,14 @@ module.exports = {
         {
           color: "red",
           status: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
         {
           color: "green",
           status: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
         },
       ],
       {}
