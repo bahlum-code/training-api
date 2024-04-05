@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: DataTypes.DATE
   }, {
     sequelize,
-    modelName: 'recipe',
+    modelName: 'Recipe',
     tableName: 'recipes'
   });
   return recipe;

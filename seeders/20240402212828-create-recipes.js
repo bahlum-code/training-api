@@ -18,23 +18,23 @@ module.exports = {
         {
           name: "Hot Dog",
           ingredients: JSON.stringify({
-            hotdog: {
+            0: {
               name: "Hotdog",
               quantity: 1
             },
-            bun: {
+            1: {
               name: "Bun",
               quantity: 1
             },
-            mustard: {
+            2: {
               name: "Mustard",
               quantity: "to taste"
             },
-            ketchup: {
+            3: {
               name: "Ketchup",
               quantity: "to taste"
             },
-            onions: {
+            4: {
               name: "Onions",
               quantity: "to taste"
             }
@@ -47,27 +47,27 @@ module.exports = {
         {
           name: "Perro caliente",
           ingredients: JSON.stringify({
-            hamburger: {
+            1: {
               name: "Hamburger",
               quantity: 1
             },
-            bun: {
+            2: {
               name: "Bun",
               quantity: 1
             },
-            mustard: {
+            3: {
               name: "Mustard",
               quantity: "to taste"
             },
-            ketchup: {
+            4: {
               name: "Ketchup",
               quantity: "to taste"
             },
-            onions: {
+            5: {
               name: "Onions",
               quantity: "to taste"
             },
-            lettuce: {
+            6: {
               name: "Lettuce",
               quantity: 1
             },

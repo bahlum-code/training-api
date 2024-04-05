@@ -2,12 +2,23 @@ const RecipeService = require("../services/recipe");
 
 class RecipeController {
     create = async (req, res, next) => {
-        const data = req.body;
-        const response = await RecipeService.createRecipe(data);
 
-        return res
-            .status(200)
-            .json({ message: "Recipe created successfully", data: response });
+        try {
+            const data = req.body;
+            const response = await RecipeService.createRecipe(data);
+
+            if(!response) return res.status(400).json({ success: false })
+    
+            return res
+                .status(200)
+                .json({ message: "Recipe created successfully", data: response });
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: 'Error creating recipe'
+            })
+        }
+       
     };
 
     fetchAll = async (eq, res, next) => {
