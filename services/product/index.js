@@ -2,15 +2,19 @@ const Product = require("../../models/Product");
 
 class ProductService {
     async fetchAll() {
-        const products = await Product.findAll();
-        return products;
+        try {
+            const products = await Product.findAll();
+            return { message: "Products fetched successfully", data: products, statusCode: 200 };
+        } catch (error) {
+            return { message: "Products could not be fetched: " + error.message, statusCode: 500 };
+        }
     }
 
     async addProductsToDB() {
         const checkProducts = await Product.findAll();
 
         if (checkProducts.length) {
-            return{
+            return {
                 message: "Products already exist in DB",
                 data: checkProducts,
                 alreadyExist: true,

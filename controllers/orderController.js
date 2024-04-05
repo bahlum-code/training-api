@@ -2,12 +2,12 @@ const OrderService = require("../services/order");
 
 class OrderController {
   create = async (req, res, next) => {
-    const data = req.body;
-    const order = await OrderService.createOrder(data);
+    const { body } = req;
+    const { message, data, statusCode } = await OrderService.createOrder(body);
 
     return res
-      .status(200)
-      .json({ message: "Order created successfully", data: order });
+      .status(statusCode)
+      .json({ message, data });
   };
 
   fetch = async (req, res, next) => {

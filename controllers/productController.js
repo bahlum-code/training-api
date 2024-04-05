@@ -22,12 +22,11 @@ class ProductController {
   };
 
   fetchAll = async (eq, res, next) => {
-    const products = await ProductService.fetchAll();
+    const { message, data, statusCode } = await ProductService.fetchAll();
 
-    return res.status(200).json({
-      data: products,
-      message: "Products fetched successfully",
-    });
+    return res
+      .status(statusCode)
+      .json({ data, message });
   };
 
   delete = async (req, res, next) => {
