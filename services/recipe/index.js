@@ -20,15 +20,22 @@ class RecipeService {
             console.log('Error', error);
             return false;
         }
-     }
-    
-    async getAllRecipes() { }
+    }
+
+    async getAllRecipes() {
+        try {
+            const recipes = await Recipe.findAll();
+            return { message: "Recipes fetched successfully", data: recipes };
+        } catch (error) {
+            return { message: "Error fetching recipes", error };
+        }
+    }
 
     async getRecipe(recipeId) { }
 
     async updateRecipe(recipeId, data) { }
 
-    async deleteRecipe(recipeId) {  }
+    async deleteRecipe(recipeId) { }
 }
 
 module.exports = new RecipeService();
