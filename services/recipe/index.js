@@ -3,7 +3,7 @@ const Recipe = models.Recipe;
 
 class RecipeService {
     async createRecipe(data) {
-        console.log('crear', data)
+
         try {
             const newRecipe = {}
 
@@ -14,7 +14,7 @@ class RecipeService {
 
             const result = await Recipe.create(newRecipe)
 
-            return true
+            return result;
 
         } catch (error) {
             console.log('Error', error);
