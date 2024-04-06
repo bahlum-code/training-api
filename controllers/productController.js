@@ -9,18 +9,6 @@ class ProductController {
       .json({ message: "Product created successfully", data: [] });
   };
 
-  addProductsToDB = async (req, res, next) => {
-    const products = await ProductService.addProductsToDB();
-
-    if (products.alreadyExist) {
-      return res.status(200).json(products);
-    }
-
-    return res
-      .status(200)
-      .json({ message: "Products added to DB successfully", data: products });
-  };
-
   fetchAll = async (eq, res, next) => {
     const { message, data, statusCode } = await ProductService.fetchAll();
 
