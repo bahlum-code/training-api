@@ -17,61 +17,61 @@ module.exports = {
       [
         {
           name: "Hot Dog",
-          ingredients: JSON.stringify({
-            0: {
+          ingredients: JSON.stringify([
+             {
               name: "Hotdog",
               quantity: 1
             },
-            1: {
+            {
               name: "Bun",
               quantity: 1
             },
-            2: {
+            {
               name: "Mustard",
               quantity: "to taste"
             },
-            3: {
+            {
               name: "Ketchup",
               quantity: "to taste"
             },
-            4: {
+            {
               name: "Onions",
               quantity: "to taste"
             }
-          }),
+            ]),
           image:'https://images-gmi-pmc.edge-generalmills.com/f5a517df-12c8-4d55-aa70-c882d99122e0.jpg',
           source: 'https://www.youtube.com/watch?v=bpwovJ-L9x4',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: "Perro caliente",
-          ingredients: JSON.stringify({
-            1: {
+          name: "Hamburger",
+          ingredients: JSON.stringify([
+             {
               name: "Hamburger",
               quantity: 1
             },
-            2: {
+            {
               name: "Bun",
               quantity: 1
             },
-            3: {
+            {
               name: "Mustard",
               quantity: "to taste"
             },
-            4: {
+            {
               name: "Ketchup",
               quantity: "to taste"
             },
-            5: {
+            {
               name: "Onions",
               quantity: "to taste"
             },
-            6: {
+            {
               name: "Lettuce",
               quantity: 1
             },
-          }),
+          ]),
           image:'https://www.recetasnestle.com.ec/sites/default/files/srh_recipes/4e4293857c03d819e4ae51de1e86d66a.jpg',
           source: 'https://www.youtube.com/watch?v=e94Q77otyVM',
           createdAt: new Date(),
