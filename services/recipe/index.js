@@ -3,7 +3,7 @@ const Recipe = models.Recipe;
 
 class RecipeService {
     async createRecipe(data) {
-        console.log('crear', data)
+
         try {
             const newRecipe = {}
 
@@ -14,21 +14,28 @@ class RecipeService {
 
             const result = await Recipe.create(newRecipe)
 
-            return true
+            return result;
 
         } catch (error) {
             console.log('Error', error);
             return false;
         }
-     }
-    
-    async getAllRecipes() { }
+    }
+
+    async getAllRecipes() {
+        try {
+            const recipes = await Recipe.findAll();
+            return { message: "Recipes fetched successfully", data: recipes };
+        } catch (error) {
+            return { message: "Error fetching recipes", error };
+        }
+    }
 
     async getRecipe(recipeId) { }
 
     async updateRecipe(recipeId, data) { }
 
-    async deleteRecipe(recipeId) {  }
+    async deleteRecipe(recipeId) { }
 }
 
 module.exports = new RecipeService();

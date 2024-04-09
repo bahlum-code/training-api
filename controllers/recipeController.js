@@ -7,8 +7,8 @@ class RecipeController {
             const data = req.body;
             const response = await RecipeService.createRecipe(data);
 
-            if(!response) return res.status(400).json({ success: false })
-    
+            if (!response) return res.status(400).json({ success: false })
+
             return res
                 .status(200)
                 .json({ message: "Recipe created successfully", data: response });
@@ -18,16 +18,15 @@ class RecipeController {
                 message: 'Error creating recipe'
             })
         }
-       
+
     };
 
-    fetchAll = async (eq, res, next) => {
-        const recipes = await RecipeService.getAllRecipes();
+    fetchAll = async (req, res, next) => {
+        const { message, data } = await RecipeService.getAllRecipes();
 
-        return res.status(200).json({
-            message: "Recipes fetched successfully",
-            data: recipes,
-        });
+        return res
+            .status(200)
+            .json({ message, data });
     };
 
     fetch = async (req, res, next) => {
