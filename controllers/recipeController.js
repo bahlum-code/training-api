@@ -22,20 +22,33 @@ class RecipeController {
     };
 
     fetchAll = async (req, res, next) => {
-        const { message, data } = await RecipeService.getAllRecipes();
-
-        return res
-            .status(200)
-            .json({ message, data });
+        try {
+            const { message, data } = await RecipeService.getAllRecipes();
+            return res
+                .status(200)
+                .json({ message, data });
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: 'Error fetching recipes'
+            })
+        }
     };
 
     fetch = async (req, res, next) => {
         const { id } = req.params;
-        const recipe = await RecipeService.getRecipe(id);
 
-        return res
-            .status(200)
-            .json({ message: "Recipe fetched successfully", data: recipe });
+        try {
+            const { message, data } = await RecipeService.getRecipe(id);
+            return res
+                .status(200)
+                .json({ message, data });
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: 'Error fetching recipe'
+            })
+        }
     };
 
     update = async (req, res, next) => {
@@ -50,11 +63,20 @@ class RecipeController {
 
     delete = async (req, res, next) => {
         const { id } = req.params;
-        const response = await RecipeService.deleteRecipe(id);
 
-        return res
-            .status(200)
-            .json({ message: "Recipe deleted successfully", data: response });
+        try {
+            const recipe = await RecipeService.deleteRecipe(id);
+            if (!recipe) return res.status(400).json({ success: false })
+
+            return res
+                .status(200)
+                .json({ message: "Recipe deleted successfully" });
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: 'Error deleting recipe'
+            })
+        }
     };
 }
 

@@ -27,15 +27,33 @@ class RecipeService {
             const recipes = await Recipe.findAll();
             return { message: "Recipes fetched successfully", data: recipes };
         } catch (error) {
-            return { message: "Error fetching recipes", error };
+            throw error
         }
     }
 
-    async getRecipe(recipeId) { }
+    async getRecipe(recipeId) {
+        try {
+            const recipe = await Recipe.findByPk(recipeId);
+            return { message: "Recipe fetched successfully", data: recipe };
+        } catch (error) {
+            throw error
+        }
+    }
 
     async updateRecipe(recipeId, data) { }
 
-    async deleteRecipe(recipeId) { }
+    async deleteRecipe(recipeId) {
+        try {
+            const recipe = await Recipe.findByPk(recipeId);
+            if (!recipe) return false;
+
+            await recipe.destroy();
+            return true;
+        } catch (error) {
+            throw error
+        }
+
+    }
 }
 
 module.exports = new RecipeService();
