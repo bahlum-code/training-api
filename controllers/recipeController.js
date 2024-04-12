@@ -11,7 +11,7 @@ class RecipeController {
 
             return res
                 .status(200)
-                .json({ message: "Recipe created successfully", data: response });
+                .json({ message: "Recipe created successfully", data: response , success: true });
         } catch (error) {
             return res.status(500).json({
                 success: false,
