@@ -1,5 +1,7 @@
 const models = require('../../models')
+const Sequelize = require('sequelize');
 const Recipe = models.Recipe;
+const Op = Sequelize.Op;
 
 class RecipeService {
     async createRecipe(data) {
@@ -25,7 +27,11 @@ class RecipeService {
     async getAllRecipes(query = "") {
         try {
             const recipes = await Recipe.findAll({
-                where: query ? { name: query } : undefined
+                where: query ? {
+                    name: {
+                        [Op.like]: `%${query}%`
+                    }
+                } : undefined
             });
             return { message: "Recipes fetched successfully: " + query, data: recipes };
         } catch (error) {
