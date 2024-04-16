@@ -22,10 +22,12 @@ class RecipeService {
         }
     }
 
-    async getAllRecipes() {
+    async getAllRecipes(query = "") {
         try {
-            const recipes = await Recipe.findAll();
-            return { message: "Recipes fetched successfully", data: recipes };
+            const recipes = await Recipe.findAll({
+                where: query ? { name: query } : undefined
+            });
+            return { message: "Recipes fetched successfully: " + query, data: recipes };
         } catch (error) {
             throw error
         }

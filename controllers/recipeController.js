@@ -22,8 +22,10 @@ class RecipeController {
     };
 
     fetchAll = async (req, res, next) => {
+        const { query } = req.params;
+
         try {
-            const { message, data } = await RecipeService.getAllRecipes();
+            const { message, data } = await RecipeService.getAllRecipes(query);
             return res
                 .status(200)
                 .json({ message, data });
