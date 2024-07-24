@@ -1,4 +1,5 @@
-const Product = require("../../models/Product");
+const Product = require("../../models/product");
+
 class ProductService {
     async fetchAll() {
         try {
