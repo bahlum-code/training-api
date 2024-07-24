@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 const Product = require("../../models/product");
+=======
+//const Product = require("../../models/Product");
+const Product = require('/app/models/product');
+>>>>>>> 10ba4f0652ce538440b7ecace55ff08b66385852
 
 class ProductService {
     async fetchAll() {
