@@ -2,8 +2,12 @@ const ProductOrder = require("../../models/productorder");
 
 class OrderService {
     async createOrder(data) {
-        const order = await ProductOrder.bulkCreate(data);
-        return order
+        try {
+            const order = await ProductOrder.bulkCreate(data);
+            return { message: "Order created successfully", data: order, statusCode: 200 }
+        } catch (error) {
+            return { message: "Order could not be created: " + error.message, statusCode: 500 }
+        }
     }
 }
 
