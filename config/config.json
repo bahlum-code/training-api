@@ -1,11 +1,11 @@
 {
   "development": {
-    "username": "kawak2_admin",
+    "username": "bahlum_user",
     "password": "Test!123",
-    "database": "kawak3",
+    "database": "bahlum",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "port": 6034
+    "port": 3307
   },
   "test": {
     "username": "kawak2_admin",

@@ -36,3 +36,5 @@ yarn.lock
 
 # Ignore SEQUELIZE config file
 seqConfig.json
+config.json
+.env
