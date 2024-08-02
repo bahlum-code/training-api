@@ -7,12 +7,14 @@ const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const recipeRoutes = require("./routes/recipeRoutes");
 const userRoutes = require("./routes/userRoutes");
+const billingRoutes = require("./routes/billingRoutes");
 
 app.use(bodyParser.json()).use(cors());
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
 app.use("/recipes", recipeRoutes);
 app.use("/user", userRoutes);
+app.use("/billing", billingRoutes);
 
 const PORT = process.env.PORT || 3000;
 
