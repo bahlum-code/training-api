@@ -38,3 +38,9 @@ yarn.lock
 seqConfig.json
 config.json
 .env
+/config/config.json
+/config/config.local.jsons
+
+#docker
+docker-compose.yml
+Dockerfile
