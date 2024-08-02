@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "root",
-    "password": "root",
-    "database": "citas",
+    "username": "local",
+    "password": "0000",
+    "database": "bahlum",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "port": 3306
