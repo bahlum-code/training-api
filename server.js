@@ -6,13 +6,13 @@ const app = express();
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
 const recipeRoutes = require("./routes/recipeRoutes");
-const userContoller = require("./controllers/userContoller");
+const userRoutes = require("./routes/userRoutes");
 
 app.use(bodyParser.json()).use(cors());
 app.use("/products", productRoutes);
 app.use("/orders", orderRoutes);
 app.use("/recipes", recipeRoutes);
-app.use("/user", userContoller);
+app.use("/user", userRoutes);
 
 const PORT = process.env.PORT || 3000;
 

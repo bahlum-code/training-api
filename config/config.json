@@ -1,13 +1,20 @@
 {
   "development": {
-    "username": "bahlum_user",
-    "password": "Test!123",
-    "database": "bahlum",
+    "username": "root",
+    "password": "root",
+    "database": "citas",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "port": 3307
+    "port": 3306
   },
   "test": {
+    "username": "kawak2_admin",
+    "password": "Test!123",
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "local": {
     "username": "kawak2_admin",
     "password": "Test!123",
     "database": "database_test",
