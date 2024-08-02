@@ -18,7 +18,7 @@ app.use("/recipes", recipeRoutes);
 app.use("/user", userRoutes);
 app.use("/roles", rolesRoutes)
 app.use("/billing", billingRoutes);
-app.use("/citas", scheduleRotes)
+app.use("/schedule", scheduleRotes)
 
 const PORT = process.env.PORT || 3000;
 
