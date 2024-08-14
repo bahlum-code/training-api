@@ -1,9 +1,9 @@
-import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
-import userRoutes from "./routes/userRoutes.js";
-
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
+
+const userRoutes = require("./routes/userRoutes");
 
 app.use(bodyParser.json()).use(cors());
 app.use("/users", userRoutes);

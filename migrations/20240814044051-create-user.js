@@ -9,32 +9,42 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
+      firstName: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       lastName: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
       phoneNumber: {
         type: Sequelize.STRING,
-      },
-      token: {
-        type: Sequelize.STRING,
+        allowNull: true,
       },
       password: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
-      rolId: {
-        type: Sequelize.INTEGER,
-        //TODO: check this
-        // references: {
-        //   model: "Roles",
-        //   key: "id",
-        // },
-        onDelete: "CASCADE",
+      role: {
+        type: Sequelize.ENUM("User", "Doctor"),
+        allowNull: false,
+      },
+      specialty: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      licenseNumber: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      clinicAddress: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,

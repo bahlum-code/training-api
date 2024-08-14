@@ -14,22 +14,46 @@ module.exports = (sequelize, DataTypes) => {
   User.init(
     {
       id: {
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER,
       },
-      name: DataTypes.STRING,
-      lastName: DataTypes.STRING,
-      email: DataTypes.STRING,
-      phoneNumber: DataTypes.STRING,
-      token: DataTypes.STRING,
-      password: DataTypes.STRING,
-      rolId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: "Roles",
-          key: "id",
-        },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      phoneNumber: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      role: {
+        type: DataTypes.ENUM("User", "Doctor"),
+        allowNull: false,
+      },
+      specialty: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      licenseNumber: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      clinicAddress: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {

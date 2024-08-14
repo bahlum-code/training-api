@@ -1,4 +1,4 @@
-class UserController {
+class userController {
   create = async (req, res, next) => {
     return res.status(200).json({ message: "Create successfully" });
   };
@@ -20,4 +20,4 @@ class UserController {
   };
 }
 
-export default new UserController();
+module.exports = new userController();
