@@ -13,7 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Appointment.init(
     {
-      id: DataTypes.INTEGER,
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       appointmentDate: DataTypes.DATE,
       status: DataTypes.STRING,
       notes: {
