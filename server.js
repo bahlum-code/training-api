@@ -1,26 +1,14 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
+import userRoutes from "./routes/userRoutes.js";
+
 const app = express();
 
-const productRoutes = require("./routes/productRoutes");
-const orderRoutes = require("./routes/orderRoutes");
-const recipeRoutes = require("./routes/recipeRoutes");
-const userRoutes = require("./routes/userRoutes");
-const rolesRoutes = require("./routes/rolesRoutes");
-const billingRoutes = require("./routes/billingRoutes");
-const scheduleRotes = require("./routes/schedulesRoutes")
-
 app.use(bodyParser.json()).use(cors());
-app.use("/products", productRoutes);
-app.use("/orders", orderRoutes);
-app.use("/recipes", recipeRoutes);
-app.use("/user", userRoutes);
-app.use("/roles", rolesRoutes)
-app.use("/billing", billingRoutes);
-app.use("/schedule", scheduleRotes)
+app.use("/users", userRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
