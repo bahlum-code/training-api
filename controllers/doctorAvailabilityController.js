@@ -1,59 +1,64 @@
 // controllers/doctorAvailabilityController.js
-const { DoctorAvailability } = require("../models");
+
+const doctorAvailabilityService = require("../services/doctorAvailabilities");
 
 class DoctorAvailabilityController {
-  create = async (req, res, next) => {
+  // Create a new doctor availability
+  create = async (req, res) => {
     try {
-      const availability = await DoctorAvailability.create(req.body);
-      return res.status(201).json(availability);
+      const availability =
+        await doctorAvailabilityService.createDoctorAvailability(req.body);
+      res.status(201).json(availability);
     } catch (error) {
-      next(error);
+      res.status(400).json({ message: error.message });
     }
   };
 
-  fetch = async (req, res, next) => {
+  // Fetch a single doctor availability by ID
+  fetch = async (req, res) => {
     try {
-      const availability = await DoctorAvailability.findByPk(req.params.id);
-      if (!availability)
-        return res.status(404).json({ message: "Availability not found" });
-      return res.status(200).json(availability);
+      const availability =
+        await doctorAvailabilityService.getDoctorAvailabilityById(
+          req.params.id
+        );
+      res.status(200).json(availability);
     } catch (error) {
-      next(error);
+      res.status(404).json({ message: error.message });
     }
   };
 
-  fetchAll = async (req, res, next) => {
+  // Fetch all doctor availabilities
+  fetchAll = async (req, res) => {
     try {
-      const availabilities = await DoctorAvailability.findAll();
-      return res.status(200).json(availabilities);
+      const availabilities =
+        await doctorAvailabilityService.getAllDoctorAvailabilities();
+      res.status(200).json(availabilities);
     } catch (error) {
-      next(error);
+      res.status(500).json({ message: error.message });
     }
   };
 
-  delete = async (req, res, next) => {
+  // Update a doctor availability by ID
+  update = async (req, res) => {
     try {
-      const availability = await DoctorAvailability.findByPk(req.params.id);
-      if (!availability)
-        return res.status(404).json({ message: "Availability not found" });
-      await availability.destroy();
-      return res
-        .status(200)
-        .json({ message: "Availability deleted successfully" });
+      const availability =
+        await doctorAvailabilityService.updateDoctorAvailability(
+          req.params.id,
+          req.body
+        );
+      res.status(200).json(availability);
     } catch (error) {
-      next(error);
+      res.status(400).json({ message: error.message });
     }
   };
 
-  update = async (req, res, next) => {
+  // Delete a doctor availability by ID
+  delete = async (req, res) => {
     try {
-      const availability = await DoctorAvailability.findByPk(req.params.id);
-      if (!availability)
-        return res.status(404).json({ message: "Availability not found" });
-      await availability.update(req.body);
-      return res.status(200).json(availability);
+      await doctorAvailabilityService.deleteDoctorAvailability(req.params.id);
+      res.status(204).send();
     } catch (error) {
-      next(error);
+      res.status(404).json({ message: error.message });
     }
   };
 }

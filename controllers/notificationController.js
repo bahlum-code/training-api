@@ -1,59 +1,62 @@
 // controllers/notificationController.js
-const { Notification } = require("../models");
+
+const notificationService = require("../services/notifications");
 
 class NotificationController {
-  create = async (req, res, next) => {
+  // Create a new notification
+  create = async (req, res) => {
     try {
-      const notification = await Notification.create(req.body);
-      return res.status(201).json(notification);
+      const notification = await notificationService.createNotification(
+        req.body
+      );
+      res.status(201).json(notification);
     } catch (error) {
-      next(error);
+      res.status(400).json({ message: error.message });
     }
   };
 
-  fetch = async (req, res, next) => {
+  // Fetch a single notification by ID
+  fetch = async (req, res) => {
     try {
-      const notification = await Notification.findByPk(req.params.id);
-      if (!notification)
-        return res.status(404).json({ message: "Notification not found" });
-      return res.status(200).json(notification);
+      const notification = await notificationService.getNotificationById(
+        req.params.id
+      );
+      res.status(200).json(notification);
     } catch (error) {
-      next(error);
+      res.status(404).json({ message: error.message });
     }
   };
 
-  fetchAll = async (req, res, next) => {
+  // Fetch all notifications
+  fetchAll = async (req, res) => {
     try {
-      const notifications = await Notification.findAll();
-      return res.status(200).json(notifications);
+      const notifications = await notificationService.getAllNotifications();
+      res.status(200).json(notifications);
     } catch (error) {
-      next(error);
+      res.status(500).json({ message: error.message });
     }
   };
 
-  delete = async (req, res, next) => {
+  // Update a notification by ID
+  update = async (req, res) => {
     try {
-      const notification = await Notification.findByPk(req.params.id);
-      if (!notification)
-        return res.status(404).json({ message: "Notification not found" });
-      await notification.destroy();
-      return res
-        .status(200)
-        .json({ message: "Notification deleted successfully" });
+      const notification = await notificationService.updateNotification(
+        req.params.id,
+        req.body
+      );
+      res.status(200).json(notification);
     } catch (error) {
-      next(error);
+      res.status(400).json({ message: error.message });
     }
   };
 
-  update = async (req, res, next) => {
+  // Delete a notification by ID
+  delete = async (req, res) => {
     try {
-      const notification = await Notification.findByPk(req.params.id);
-      if (!notification)
-        return res.status(404).json({ message: "Notification not found" });
-      await notification.update(req.body);
-      return res.status(200).json(notification);
+      await notificationService.deleteNotification(req.params.id);
+      res.status(204).send();
     } catch (error) {
-      next(error);
+      res.status(404).json({ message: error.message });
     }
   };
 }
