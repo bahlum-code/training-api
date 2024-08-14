@@ -5,11 +5,14 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     // Fetch existing users and doctors for valid IDs
-    const users = await queryInterface.sequelize.query("SELECT id FROM Users", {
-      type: Sequelize.QueryTypes.SELECT,
-    });
+    const users = await queryInterface.sequelize.query(
+      "SELECT id FROM Users WHERE role = 'User'",
+      {
+        type: Sequelize.QueryTypes.SELECT,
+      }
+    );
     const doctors = await queryInterface.sequelize.query(
-      "SELECT id FROM Users",
+      "SELECT id FROM Users WHERE role = 'Doctor'",
       { type: Sequelize.QueryTypes.SELECT }
     );
 
