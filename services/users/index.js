@@ -32,9 +32,14 @@ const getAllUsers = async () => {
 
 const updateUser = async (id, updateData) => {
   try {
-    const [affectedRows] = await User.update(updateData, { where: { id } });
-    if (affectedRows === 0) throw new Error("User not found");
-    return await getUserById(id); // Return updated user
+    const [affectedRows] = await User.update(updateData, {
+      where: { id },
+    });
+    if (affectedRows === 0) {
+      throw new Error("User not found");
+    }
+
+    return await getUserById(id);
   } catch (error) {
     throw new Error("Error updating user: " + error.message);
   }

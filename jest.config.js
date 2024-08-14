@@ -1,6 +1,6 @@
-// jest.config.js
-
-module.exports = {
-  testEnvironment: "node",
-  setupFilesAfterEnv: ["./jest.setup.js"], // Optional: to include setup files
+/** @returns {Promise<import('jest').Config>} */
+module.exports = async () => {
+  return {
+    verbose: true,
+  };
 };

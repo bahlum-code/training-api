@@ -36,7 +36,9 @@ const updateNotification = async (id, updateData) => {
       where: { id },
     });
     if (affectedRows === 0) throw new Error("Notification not found");
-    return await getNotificationById(id); // Return updated notification
+    const notification = await getNotificationById(id);
+
+    return notification;
   } catch (error) {
     throw new Error("Error updating notification: " + error.message);
   }
