@@ -1,8 +1,4 @@
 const appointmentService = require("./index");
-const {
-  createAppointment,
-  updateAppointment,
-} = require("../../controllers/appointmentController");
 const testServer = require("../../utils/testServer");
 const appointmentRoutes = require("../../routes/appointmentRoutes");
 const {
@@ -33,7 +29,7 @@ jest.mock("../../models", () => ({
   },
 }));
 
-describe("[ Services / appointments ]", () => {
+describe("[ Services / Appointment ]  Create Appointment", () => {
   it("should throw an error if the doctor is not available on the selected date/time", async () => {
     // Arrange
     DoctorAvailability.findOne.mockResolvedValue(null); // Doctor is not available
@@ -47,10 +43,13 @@ describe("[ Services / appointments ]", () => {
       total: 100.0,
     };
 
-    // Act & Assert
-    await expect(
-      appointmentService.createAppointment(appointmentData)
-    ).rejects.toThrow("The doctor is not available on the selected date/time.");
+    // Act
+    const promise = appointmentService.createAppointment(appointmentData);
+
+    // Assert
+    await expect(promise).rejects.toThrow(
+      "The doctor is not available on the selected date/time."
+    );
   });
 
   it("should throw an error if the doctor is unavailable due to a booking", async () => {
@@ -78,10 +77,13 @@ describe("[ Services / appointments ]", () => {
       total: 100.0,
     };
 
-    // Act & Assert
-    await expect(
-      appointmentService.createAppointment(appointmentData)
-    ).rejects.toThrow("The doctor is not available on the selected date/time.");
+    // Act
+    const promise = appointmentService.createAppointment(appointmentData);
+
+    // Assert
+    await expect(promise).rejects.toThrow(
+      "The doctor is temporarily unavailable at the selected date/time. Please select a different time or date."
+    );
   });
 
   it("should throw an error if there is already an appointment at the selected date/time", async () => {
@@ -115,10 +117,11 @@ describe("[ Services / appointments ]", () => {
       total: 100.0,
     };
 
-    // Act & Assert
-    await expect(
-      appointmentService.createAppointment(appointmentData)
-    ).rejects.toThrow(
+    // Act
+    const promise = appointmentService.createAppointment(appointmentData);
+
+    // Assert
+    await expect(promise).rejects.toThrow(
       "There is already an appointment for the doctor at the selected date/time."
     );
   });
@@ -173,6 +176,182 @@ describe("[ Services / appointments ]", () => {
 
     // Assert
     await expect(result).rejects.toThrow("Error creating appointment:");
+  });
+});
+
+describe("[ Services / Appointment ]  Update Appointment", () => {
+  it("should throw an error if the doctor is not available on the selected date/time", async () => {
+    // Arrange
+    DoctorAvailability.findOne.mockResolvedValue(null); // The doctor is not available
+
+    const appointmentData = {
+      id: 1,
+      doctorId: 1,
+      appointmentDate: "2024-08-16T10:00:00",
+      userId: 1,
+      status: "scheduled",
+      notes: "Test appointment",
+      total: 100.0,
+    };
+    // Act
+    const promise = appointmentService.updateAppointment(
+      appointmentData.id,
+      appointmentData
+    );
+
+    // Assert
+    await expect(promise).rejects.toThrow(
+      "The doctor is not available on the selected date/time."
+    );
+  });
+
+  it("should throw an error if the doctor is unavailable due to a booking", async () => {
+    // Arrange
+    DoctorAvailability.findOne.mockResolvedValue({
+      doctorId: 1,
+      dayOfWeek: "Friday",
+      startTime: "09:00:00",
+      endTime: "17:00:00",
+      isAvailable: true,
+    });
+
+    DoctorUnavailability.findOne.mockResolvedValue({
+      doctorId: 1,
+      startDate: new Date("2024-08-16"),
+      endDate: new Date("2024-08-16"),
+    });
+
+    const appointmentData = {
+      id: 1,
+      doctorId: 1,
+      appointmentDate: "2024-08-16T10:00:00",
+      userId: 2,
+      status: "scheduled",
+      notes: "Test appointment",
+      total: 100.0,
+    };
+
+    // Act
+    const promise = appointmentService.updateAppointment(
+      appointmentData.id,
+      appointmentData
+    );
+
+    // Assert
+    await expect(promise).rejects.toThrow(
+      "The doctor is temporarily unavailable at the selected date/time. Please select a different time or date."
+    );
+  });
+
+  it("should throw an error if there is already an appointment at the selected date/time", async () => {
+    // Arrange
+    DoctorAvailability.findOne.mockResolvedValue({
+      doctorId: 1,
+      dayOfWeek: "Friday",
+      startTime: "09:00:00",
+      endTime: "17:00:00",
+      isAvailable: true,
+    });
+
+    DoctorUnavailability.findOne.mockResolvedValue(null);
+
+    Appointment.findOne.mockResolvedValue({
+      id: 2, // Otro ID diferente que indica conflicto de citas
+      doctorId: 1,
+      appointmentDate: "2024-08-16T10:00:00",
+      userId: 1,
+      status: "scheduled",
+      notes: "Existing appointment",
+      total: 100.0,
+    });
+
+    const appointmentData = {
+      id: 1, // ID de la cita que se está intentando actualizar
+      doctorId: 1,
+      appointmentDate: "2024-08-16T10:00:00",
+      userId: 1,
+      status: "scheduled",
+      notes: "Test appointment",
+      total: 100.0,
+    };
+
+    // Act
+    const promise = appointmentService.updateAppointment(
+      appointmentData.id,
+      appointmentData
+    );
+
+    // Assert
+    await expect(promise).rejects.toThrow(
+      "There is already an appointment for the doctor at the selected date/time."
+    );
+  });
+
+  it("should update the appointment if all conditions are met", async () => {
+    // Arrange
+    DoctorAvailability.findOne.mockResolvedValue({
+      doctorId: 1,
+      dayOfWeek: "Friday",
+      startTime: "09:00:00",
+      endTime: "17:00:00",
+      isAvailable: true,
+    });
+
+    DoctorUnavailability.findOne.mockResolvedValue(null);
+
+    Appointment.findOne.mockResolvedValue(null); // No hay conflicto de citas
+
+    const appointmentData = {
+      id: 1,
+      doctorId: 1,
+      appointmentDate: "2024-08-16T10:00:00",
+      userId: 1,
+      status: "scheduled",
+      notes: "Test appointment updated",
+      total: 150.0,
+    };
+
+    Appointment.update.mockResolvedValue([1]); // Retorna que se actualizó correctamente
+
+    const updatedAppointment = {
+      ...appointmentData,
+      notes: "Test appointment updated",
+      total: 150.0,
+    };
+
+    Appointment.findByPk.mockResolvedValue(updatedAppointment);
+
+    // Act
+    const result = await appointmentService.updateAppointment(
+      appointmentData.id,
+      appointmentData
+    );
+
+    // Assert
+    expect(result).toEqual(updatedAppointment);
+    expect(Appointment.update).toHaveBeenCalledWith(appointmentData, {
+      where: { id: appointmentData.id },
+    });
+  });
+
+  it("should throw a generic error if something goes wrong during the update", async () => {
+    // Arrange
+    DoctorAvailability.findOne.mockRejectedValue(new Error("Database error"));
+
+    const appointmentData = {
+      id: 1,
+      doctorId: 1,
+      appointmentDate: "2024-08-16T10:00:00",
+      userId: 1,
+      status: "scheduled",
+      notes: "Test appointment",
+      total: 100.0,
+    };
+
+    // Act & Assert
+    await expect(
+      appointmentService.updateAppointment(appointmentData.id, appointmentData)
+    ).rejects.toThrow("Error updating appointment:");
   });
 });
 

@@ -44,3 +44,4 @@ config.json
 #docker
 docker-compose.yml
 Dockerfile
+coverage
