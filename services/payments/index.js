@@ -1,6 +1,4 @@
-// services/payments/index.js
-
-const { Payment } = require("../../models"); // Adjust path as needed
+const { Payment } = require("../../models");
 
 const createPayment = async (paymentData) => {
   try {
@@ -34,7 +32,7 @@ const updatePayment = async (id, updateData) => {
   try {
     const [affectedRows] = await Payment.update(updateData, { where: { id } });
     if (affectedRows === 0) throw new Error("Payment not found");
-    return await getPaymentById(id); // Return updated payment
+    return await getPaymentById(id);
   } catch (error) {
     throw new Error("Error updating payment: " + error.message);
   }

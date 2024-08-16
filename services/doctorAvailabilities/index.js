@@ -1,6 +1,4 @@
-// services/doctorAvailabilities/index.js
-
-const { DoctorAvailability } = require("../../models"); // Adjust path as needed
+const { DoctorAvailability } = require("../../models");
 
 const createDoctorAvailability = async (availabilityData) => {
   try {
@@ -36,7 +34,7 @@ const updateDoctorAvailability = async (id, updateData) => {
       where: { id },
     });
     if (affectedRows === 0) throw new Error("Doctor availability not found");
-    return await getDoctorAvailabilityById(id); // Return updated availability
+    return await getDoctorAvailabilityById(id);
   } catch (error) {
     throw new Error("Error updating doctor availability: " + error.message);
   }

@@ -1,6 +1,4 @@
-// services/doctorBillings/index.js
-
-const { DoctorBilling } = require("../../models"); // Adjust path as needed
+const { DoctorBilling } = require("../../models");
 
 const createDoctorBilling = async (billingData) => {
   try {
@@ -36,7 +34,7 @@ const updateDoctorBilling = async (id, updateData) => {
       where: { id },
     });
     if (affectedRows === 0) throw new Error("Doctor billing not found");
-    return await getDoctorBillingById(id); // Return updated billing
+    return await getDoctorBillingById(id);
   } catch (error) {
     throw new Error("Error updating doctor billing: " + error.message);
   }

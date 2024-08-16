@@ -1,6 +1,4 @@
-// services/users/index.js
-
-const { User } = require("../../models"); // Adjust path as needed
+const { User } = require("../../models");
 
 const createUser = async (userData) => {
   try {

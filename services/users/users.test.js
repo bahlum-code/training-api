@@ -28,14 +28,28 @@ describe("User Service", () => {
       clinicAddress: null,
     };
 
+    const newUser2 = {
+      id: 1,
+      firstName: "John",
+      lastName: "Doe",
+      email: "john.doe@example.com",
+      phoneNumber: "1234567890",
+      password: "password123",
+      role: "User",
+      specialty: null,
+      licenseNumber: null,
+      clinicAddress: null,
+      status: "active",
+    };
+
     User.create.mockResolvedValue(newUser);
 
     // Act
-    const result = await userService.createUser(newUser);
+    const result = await userService.createUser(newUser2);
 
     // Assert
     expect(result).toEqual(newUser);
-    expect(User.create).toHaveBeenCalledWith(newUser);
+    expect(User.create).toHaveBeenCalledWith(newUser2);
   });
 
   it("should fetch a user by ID", async () => {

@@ -5,6 +5,7 @@ const {
   Appointment,
   DoctorAvailability,
   DoctorUnavailability,
+  DoctorBilling,
 } = require("../../models");
 
 const request = testServer(appointmentRoutes);
@@ -25,6 +26,9 @@ jest.mock("../../models", () => ({
     findOne: jest.fn(),
   },
   DoctorUnavailability: {
+    findOne: jest.fn(),
+  },
+  DoctorBilling: {
     findOne: jest.fn(),
   },
 }));
@@ -137,8 +141,11 @@ describe("[ Services / Appointment ]  Create Appointment", () => {
     });
 
     DoctorUnavailability.findOne.mockResolvedValue(null);
-
     Appointment.findOne.mockResolvedValue(null);
+    DoctorBilling.findOne.mockResolvedValue({
+      doctorId: 1,
+      totalAmount: 100.0,
+    });
 
     const appointmentData = {
       doctorId: 1,

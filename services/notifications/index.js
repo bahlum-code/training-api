@@ -1,6 +1,4 @@
-// services/notifications/index.js
-
-const { Notification } = require("../../models"); // Adjust path as needed
+const { Notification } = require("../../models");
 
 const createNotification = async (notificationData) => {
   try {
