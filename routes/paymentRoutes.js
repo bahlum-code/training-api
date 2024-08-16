@@ -9,4 +9,4 @@ router.get("/:id", paymentController.fetch);
 router.put("/:id", paymentController.update);
 router.delete("/:id", paymentController.delete);
 
-module.exports = router;
+module.exports = (app) => app.use("/payments", router);

@@ -1,9 +1,6 @@
-// controllers/paymentController.js
-
 const paymentService = require("../services/payments");
 
 class PaymentController {
-  // Create a new payment
   create = async (req, res) => {
     try {
       const payment = await paymentService.createPayment(req.body);
@@ -13,7 +10,6 @@ class PaymentController {
     }
   };
 
-  // Fetch a single payment by ID
   fetch = async (req, res) => {
     try {
       const payment = await paymentService.getPaymentById(req.params.id);
@@ -23,7 +19,6 @@ class PaymentController {
     }
   };
 
-  // Fetch all payments
   fetchAll = async (req, res) => {
     try {
       const payments = await paymentService.getAllPayments();
@@ -33,7 +28,6 @@ class PaymentController {
     }
   };
 
-  // Update a payment by ID
   update = async (req, res) => {
     try {
       const payment = await paymentService.updatePayment(
@@ -46,7 +40,6 @@ class PaymentController {
     }
   };
 
-  // Delete a payment by ID
   delete = async (req, res) => {
     try {
       await paymentService.deletePayment(req.params.id);

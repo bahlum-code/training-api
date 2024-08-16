@@ -1,9 +1,6 @@
-// controllers/notificationController.js
-
 const notificationService = require("../services/notifications");
 
 class NotificationController {
-  // Create a new notification
   create = async (req, res) => {
     try {
       const notification = await notificationService.createNotification(
@@ -15,7 +12,6 @@ class NotificationController {
     }
   };
 
-  // Fetch a single notification by ID
   fetch = async (req, res) => {
     try {
       const notification = await notificationService.getNotificationById(
@@ -27,7 +23,6 @@ class NotificationController {
     }
   };
 
-  // Fetch all notifications
   fetchAll = async (req, res) => {
     try {
       const notifications = await notificationService.getAllNotifications();
@@ -37,7 +32,6 @@ class NotificationController {
     }
   };
 
-  // Update a notification by ID
   update = async (req, res) => {
     try {
       const notification = await notificationService.updateNotification(
@@ -50,7 +44,6 @@ class NotificationController {
     }
   };
 
-  // Delete a notification by ID
   delete = async (req, res) => {
     try {
       await notificationService.deleteNotification(req.params.id);

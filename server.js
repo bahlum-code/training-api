@@ -12,12 +12,13 @@ const doctorUnavailabilityRoutes = require("./routes/doctorUnavailabilityRoutes"
 
 app.use(bodyParser.json()).use(cors());
 
-app.use("/users", userRoutes);
-app.use("/appointments", appointmentRoutes);
-app.use("/payments", paymentRoutes);
-app.use("/notifications", notificationRoutes);
-app.use("/doctor-availabilities", doctorAvailabilityRoutes);
-app.use("/doctor-unavailabilities", doctorUnavailabilityRoutes);
+//TODO: inversion of control
+userRoutes(app);
+paymentRoutes(app);
+notificationRoutes(app);
+doctorUnavailabilityRoutes(app);
+doctorAvailabilityRoutes(app);
+appointmentRoutes(app);
 
 const PORT = process.env.PORT || 4000;
 

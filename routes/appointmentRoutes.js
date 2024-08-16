@@ -9,4 +9,4 @@ router.get("/:id", appointmentController.fetch);
 router.put("/:id", appointmentController.update);
 router.delete("/:id", appointmentController.delete);
 
-module.exports = router;
+module.exports = (app) => app.use("/appointments", router);

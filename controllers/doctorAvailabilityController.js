@@ -1,9 +1,6 @@
-// controllers/doctorAvailabilityController.js
-
 const doctorAvailabilityService = require("../services/doctorAvailabilities");
 
 class DoctorAvailabilityController {
-  // Create a new doctor availability
   create = async (req, res) => {
     try {
       const availability =
@@ -14,7 +11,6 @@ class DoctorAvailabilityController {
     }
   };
 
-  // Fetch a single doctor availability by ID
   fetch = async (req, res) => {
     try {
       const availability =
@@ -27,7 +23,6 @@ class DoctorAvailabilityController {
     }
   };
 
-  // Fetch all doctor availabilities
   fetchAll = async (req, res) => {
     try {
       const availabilities =
@@ -38,7 +33,6 @@ class DoctorAvailabilityController {
     }
   };
 
-  // Update a doctor availability by ID
   update = async (req, res) => {
     try {
       const availability =
@@ -52,7 +46,6 @@ class DoctorAvailabilityController {
     }
   };
 
-  // Delete a doctor availability by ID
   delete = async (req, res) => {
     try {
       await doctorAvailabilityService.deleteDoctorAvailability(req.params.id);

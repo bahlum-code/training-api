@@ -1,9 +1,6 @@
-// controllers/doctorUnavailabilityController.js
-
 const doctorUnavailabilityService = require("../services/doctorUnavailabilities");
 
 class DoctorUnavailabilityController {
-  // Create a new doctor unavailability
   create = async (req, res) => {
     try {
       const unavailability =
@@ -14,7 +11,6 @@ class DoctorUnavailabilityController {
     }
   };
 
-  // Fetch a single doctor unavailability by ID
   fetch = async (req, res) => {
     try {
       const unavailability =
@@ -27,7 +23,6 @@ class DoctorUnavailabilityController {
     }
   };
 
-  // Fetch all doctor unavailabilities
   fetchAll = async (req, res) => {
     try {
       const unavailabilities =
@@ -38,7 +33,6 @@ class DoctorUnavailabilityController {
     }
   };
 
-  // Update a doctor unavailability by ID
   update = async (req, res) => {
     try {
       const unavailability =
@@ -52,7 +46,6 @@ class DoctorUnavailabilityController {
     }
   };
 
-  // Delete a doctor unavailability by ID
   delete = async (req, res) => {
     try {
       await doctorUnavailabilityService.deleteDoctorUnavailability(

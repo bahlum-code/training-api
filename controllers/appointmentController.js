@@ -1,9 +1,6 @@
-// controllers/appointmentController.js
-
 const appointmentService = require("../services/appointments");
 
 class AppointmentController {
-  // Create a new appointment
   create = async (req, res) => {
     try {
       const appointment = await appointmentService.createAppointment(req.body);
@@ -13,7 +10,6 @@ class AppointmentController {
     }
   };
 
-  // Fetch a single appointment by ID
   fetch = async (req, res) => {
     try {
       const appointment = await appointmentService.getAppointmentById(
@@ -25,7 +21,6 @@ class AppointmentController {
     }
   };
 
-  // Fetch all appointments
   fetchAll = async (req, res) => {
     try {
       const appointments = await appointmentService.getAllAppointments();
@@ -35,7 +30,6 @@ class AppointmentController {
     }
   };
 
-  // Update an appointment by ID
   update = async (req, res) => {
     try {
       const appointment = await appointmentService.updateAppointment(
@@ -48,7 +42,6 @@ class AppointmentController {
     }
   };
 
-  // Delete an appointment by ID
   delete = async (req, res) => {
     try {
       await appointmentService.deleteAppointment(req.params.id);

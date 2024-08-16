@@ -9,4 +9,4 @@ router.get("/:id", doctorUnavailabilityController.fetch);
 router.put("/:id", doctorUnavailabilityController.update);
 router.delete("/:id", doctorUnavailabilityController.delete);
 
-module.exports = router;
+module.exports = (app) => app.use("/doctor-unavailabilities", router);

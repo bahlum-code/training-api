@@ -9,4 +9,4 @@ router.get("/:id", userController.fetch);
 router.put("/:id", userController.update);
 router.delete("/:id", userController.delete);
 
-module.exports = router;
+module.exports = (app) => app.use("/users", router);

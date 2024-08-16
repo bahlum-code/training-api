@@ -9,4 +9,4 @@ router.get("/:id", notificationController.fetch);
 router.put("/:id", notificationController.update);
 router.delete("/:id", notificationController.delete);
 
-module.exports = router;
+module.exports = (app) => app.use("/notifications", router);
