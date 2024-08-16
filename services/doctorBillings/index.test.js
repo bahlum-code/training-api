@@ -13,6 +13,7 @@ jest.mock("../../models", () => ({
 
 describe("Doctor Billings Service", () => {
   it("should create a doctor billing", async () => {
+    // Arrange
     const newBilling = {
       id: 1,
       doctorId: 1,
@@ -21,8 +22,10 @@ describe("Doctor Billings Service", () => {
 
     DoctorBilling.create.mockResolvedValue(newBilling);
 
+    // Act
     const result = await doctorBillingsService.createDoctorBilling(newBilling);
 
+    // Assert
     expect(result).toEqual(newBilling);
     expect(DoctorBilling.create).toHaveBeenCalledWith(newBilling);
   });

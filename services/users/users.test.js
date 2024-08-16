@@ -14,6 +14,7 @@ jest.mock("../../models", () => ({
 
 describe("User Service", () => {
   it("should create a user", async () => {
+    // Arrange
     const newUser = {
       id: 1,
       firstName: "John",
@@ -29,12 +30,16 @@ describe("User Service", () => {
 
     User.create.mockResolvedValue(newUser);
 
+    // Act
     const result = await userService.createUser(newUser);
+
+    // Assert
     expect(result).toEqual(newUser);
     expect(User.create).toHaveBeenCalledWith(newUser);
   });
 
   it("should fetch a user by ID", async () => {
+    // Arrange
     const user = {
       id: 1,
       firstName: "John",
@@ -50,12 +55,16 @@ describe("User Service", () => {
 
     User.findByPk.mockResolvedValue(user);
 
+    // Act
     const result = await userService.getUserById(1);
+
+    // Assert
     expect(result).toEqual(user);
     expect(User.findByPk).toHaveBeenCalledWith(1);
   });
 
   it("should fetch all users", async () => {
+    // Arrange
     const users = [
       {
         id: 1,
@@ -69,18 +78,20 @@ describe("User Service", () => {
         licenseNumber: null,
         clinicAddress: null,
       },
-      // Add more users as needed
     ];
 
     User.findAll.mockResolvedValue(users);
 
+    // Act
     const result = await userService.getAllUsers();
+
+    // Assert
     expect(result).toEqual(users);
     expect(User.findAll).toHaveBeenCalled();
   });
 
-  // Test for updating a user by ID
   it("should update a user by ID", async () => {
+    // Arrange
     const updatedData = { lastName: "Smith" };
     const updatedUser = {
       id: 1,
@@ -95,21 +106,27 @@ describe("User Service", () => {
       clinicAddress: null,
     };
 
-    User.update.mockResolvedValue([1]); // Returns number of affected rows
-
+    User.update.mockResolvedValue([1]); // Sequelize returns the number of affected rows
     User.findByPk.mockResolvedValue(updatedUser);
 
+    // Act
     const result = await userService.updateUser(1, updatedData);
 
+    // Assert
     expect(result).toEqual(updatedUser);
     expect(User.update).toHaveBeenCalledWith(updatedData, { where: { id: 1 } });
     expect(User.findByPk).toHaveBeenCalledWith(1);
   });
 
   it("should delete a user by ID", async () => {
-    User.destroy.mockResolvedValue(1); // Sequelize returns the number of affected rows
+    // Arrange
+    const userId = 1;
+    User.destroy.mockResolvedValue(userId); // Sequelize returns the number of affected rows
 
-    await userService.deleteUser(1);
-    expect(User.destroy).toHaveBeenCalledWith({ where: { id: 1 } });
+    // Act
+    await userService.deleteUser(userId);
+
+    // Assert
+    expect(User.destroy).toHaveBeenCalledWith({ where: { id: userId } });
   });
 });
