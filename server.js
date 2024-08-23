@@ -10,6 +10,7 @@ const notificationRoutes = require("./routes/notificationRoutes");
 const doctorAvailabilityRoutes = require("./routes/doctorAvailabilityRoutes");
 const doctorUnavailabilityRoutes = require("./routes/doctorUnavailabilityRoutes");
 const doctorRoutes = require("./routes/doctorRoutes");
+const specialtiesRoutes = require("./routes/specialtiesRoutes");
 
 app.use(bodyParser.json()).use(cors());
 
@@ -21,6 +22,7 @@ doctorUnavailabilityRoutes(app);
 doctorAvailabilityRoutes(app);
 appointmentRoutes(app);
 doctorRoutes(app);
+specialtiesRoutes(app)
 
 const PORT = process.env.PORT || 4000;
 
