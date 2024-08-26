@@ -10,7 +10,7 @@ module.exports = {
         primaryKey: true,
       },
       specialtyName: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       specialtyDescription: {

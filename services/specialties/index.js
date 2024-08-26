@@ -89,10 +89,10 @@ const getAppointmentById = async (id) => {
   }
 };
 
-const getAllAppointments = async () => {
+const getAllSpecialties = async () => {
   try {
-    const appointments = await Appointment.findAll();
-    return appointments;
+    const specialties = await Specialty.findAll();
+    return specialties;
   } catch (error) {
     throw new Error("Error fetching appointments: " + error.message);
   }
@@ -175,7 +175,7 @@ const deleteAppointment = async (id) => {
 module.exports = {
   createAppointment,
   getAppointmentById,
-  getAllAppointments,
+  getAllSpecialties,
   updateAppointment,
   deleteAppointment,
 };

@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       specialtyId:{
         type:DataTypes.INTEGER,
-
+        allowNull: true,
       }
     },
     {
