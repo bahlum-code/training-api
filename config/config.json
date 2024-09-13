@@ -1,32 +1,32 @@
 {
   "development": {
-    "username": "bahlum_user",
-    "password": "Test!123",
-    "database": "bahlum",
+    "username": "postgres",
+    "password": "password",
+    "database": "specialist_develop",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "port": 3307
+    "dialect": "postgres",
+    "port": 5432
   },
   "test": {
-    "username": "kawak2_admin",
-    "password": "Test!123",
-    "database": "database_test",
+    "username": "postgres",
+    "password": "password",
+    "database": "specialist_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "local": {
-    "username": "kawak2_admin",
-    "password": "Test!123",
-    "database": "database_test",
+    "username": "postgres",
+    "password": "password",
+    "database": "specialist_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "production": {
-    "username": "kawak2_admin",
+    "username": "postgres",
     "password": null,
-    "database": "database_production",
+    "database": "specialist_prod",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   }
 }
 

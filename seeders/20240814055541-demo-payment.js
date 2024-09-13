@@ -6,10 +6,10 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     // Fetch existing appointments and users for valid IDs
     const appointments = await queryInterface.sequelize.query(
-      "SELECT id FROM Appointments",
+      "SELECT id FROM \"Appointments\"",
       { type: Sequelize.QueryTypes.SELECT }
     );
-    const users = await queryInterface.sequelize.query("SELECT id FROM Users", {
+    const users = await queryInterface.sequelize.query("SELECT id FROM \"Users\"", {
       type: Sequelize.QueryTypes.SELECT,
     });
 
@@ -20,8 +20,8 @@ module.exports = {
     const payments = [];
     for (let i = 0; i < 50; i++) {
       payments.push({
-        PaymentMethod: ["Credit Card", "Cash", "Bank Transfer"][i % 3],
-        PaymentDate: new Date(
+        paymentMethod: ["Credit Card", "Cash", "Bank Transfer"][i % 3],
+        paymentDate: new Date(
           `2024-08-${String((i % 31) + 1).padStart(2, "0")}`
         ),
         appointmentId: appointmentIds[i % appointmentIds.length],

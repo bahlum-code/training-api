@@ -6,11 +6,11 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     // Fetch existing doctors and appointments for valid IDs
     const doctors = await queryInterface.sequelize.query(
-      "SELECT id FROM Users WHERE role = 'Doctor'",
+      "SELECT id FROM \"Users\" WHERE role = 'Doctor'",
       { type: Sequelize.QueryTypes.SELECT }
     );
     const appointments = await queryInterface.sequelize.query(
-      "SELECT doctorId, total FROM Appointments",
+      "SELECT \"doctorId\", total FROM \"Appointments\"",
       { type: Sequelize.QueryTypes.SELECT }
     );
 
