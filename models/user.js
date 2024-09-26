@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+//const specialty = require("./specialty");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -14,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(models.DoctorUnavailability, { foreignKey: "doctorId" });
       this.hasMany(models.Payment, { foreignKey: "userId" });
       this.hasMany(models.Notification, { foreignKey: "userId" });
+      this.belongsTo(models.Specialty, { foreignKey: "specialtyId"});
     }
   }
   User.init(
@@ -60,6 +62,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      specialtyId:{
+        type:DataTypes.INTEGER,
+        allowNull: true,
+      }
     },
     {
       sequelize,

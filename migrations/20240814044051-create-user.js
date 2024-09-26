@@ -46,6 +46,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      specialtyId:{
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: "Specialties",
+          key: "id",
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
