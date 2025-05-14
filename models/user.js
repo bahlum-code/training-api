@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, Op } = require("sequelize");
 //const specialty = require("./specialty");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -10,12 +10,57 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Appointment, { foreignKey: "userId" });
-      this.hasMany(models.Appointment, { foreignKey: "doctorId" });
+      this.hasOne(models.DoctorBilling, {
+        foreignKey: "doctorId",
+        as: "billing",
+      });
       this.hasMany(models.DoctorAvailability, { foreignKey: "doctorId" });
       this.hasMany(models.DoctorUnavailability, { foreignKey: "doctorId" });
       this.hasMany(models.Payment, { foreignKey: "userId" });
       this.hasMany(models.Notification, { foreignKey: "userId" });
-      this.belongsTo(models.Specialty, { foreignKey: "specialtyId"});
+      this.belongsTo(models.Specialty, { foreignKey: "specialtyId" });
+    }
+    /**
+     * Busca médicos según un criterio flexible.
+     */
+    static async findDoctorsByFlexibleCriteria(searchValue) {
+      console.log("searchValue:", searchValue);
+      try {
+        const doctors = await this.findAll({
+          attributes: ["id", "firstName", "lastName", "specialty"],
+          where: {
+            role: "Doctor",
+            [Op.or]: [
+              { firstName: { [Op.like]: `%${searchValue}%` } },
+              { lastName: { [Op.like]: `%${searchValue}%` } },
+              {
+                "$Specialty.specialtyName$": { [Op.like]: `%${searchValue}%` },
+              },
+              { specialty: { [Op.like]: `%${searchValue}%` } },
+            ],
+          },
+          include: [
+            {
+              model: sequelize.models.Specialty,
+              attributes: ["specialtyName"],
+            },
+            {
+              model: sequelize.models.DoctorAvailability,
+              attributes: ["dayOfWeek", "startTime", "endTime"],
+            },
+            {
+              model: sequelize.models.DoctorBilling,
+              attributes: ["totalAmount"],
+              as: "billing",
+            },
+          ],
+        });
+
+        return doctors;
+      } catch (error) {
+        console.error("Error al buscar médicos:", error);
+        throw new Error("Error al buscar médicos");
+      }
     }
   }
   User.init(
@@ -62,10 +107,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      specialtyId:{
-        type:DataTypes.INTEGER,
+      specialtyId: {
+        type: DataTypes.INTEGER,
         allowNull: true,
-      }
+      },
     },
     {
       sequelize,

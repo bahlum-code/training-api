@@ -1,8 +1,8 @@
 {
   "development": {
-      "username": "kawak2_admin",
-      "password": "Test!123",
-      "database": "kawak2",
+      "username": "root",
+      "password": "1993",
+      "database": "kawak_api",
       "host": "127.0.0.1",
       "dialect": "mysql",
       "port": 3306
