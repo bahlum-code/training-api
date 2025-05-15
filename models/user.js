@@ -27,7 +27,14 @@ module.exports = (sequelize, DataTypes) => {
       console.log("searchValue:", searchValue);
       try {
         const doctors = await this.findAll({
-          attributes: ["id", "firstName", "lastName", "specialty"],
+          attributes: [
+            "id",
+            "firstName",
+            "lastName",
+            "specialty",
+            "clinicAddress",
+            "phoneNumber",
+          ],
           where: {
             role: "Doctor",
             [Op.or]: [
