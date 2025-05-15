@@ -5,21 +5,23 @@
       "database": "kawak2",
       "host": "127.0.0.1",
       "dialect": "mysql",
-      "port": 3306
+      "port": 3307
     },
     "test": {
       "username": "kawak2_admin",
       "password": "Test!123",
       "database": "database_test",
       "host": "127.0.0.1",
-      "dialect": "mysql"
+      "dialect": "mysql",
+      "port": 3307
     },
     "production": {
       "username": "kawak2_admin",
-      "password": null,
+      "password": "Test!123",
       "database": "database_production",
       "host": "127.0.0.1",
-      "dialect": "mysql"
+      "dialect": "mysql",
+      "port": 3307
     }
   }
   
